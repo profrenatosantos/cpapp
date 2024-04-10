@@ -1,4 +1,4 @@
-_schema-version: '3.1'
+_schema-version: "3.1"
 ID: cpapp
 version: 1.0.0
 description: "A simple CAP project."
@@ -8,8 +8,9 @@ build-parameters:
   before-all:
     - builder: custom
       commands:
-        - npm ci
-        - npx cds build --production
+        - npm install --production
+        - npx -p @sap/cds-dk cds build --production
+        - npx rimraf gen/db/src/gen/data
 modules:
   - name: cpapp-srv
     type: nodejs
@@ -26,7 +27,7 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: cpapp-db
-      - name: cpapp-auth
+      - name: cpapp-uaa
 
   - name: cpapp-db-deployer
     type: hdb
@@ -42,7 +43,7 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
-  - name: cpapp-auth
+  - name: cpapp-uaa
     type: org.cloudfoundry.managed-service
     parameters:
       service: xsuaa
