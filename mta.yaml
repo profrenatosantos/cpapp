@@ -26,6 +26,7 @@ modules:
           srv-url: ${default-url}
     requires:
       - name: cpapp-db
+      - name: cpapp-auth
 
   - name: cpapp-db-deployer
     type: hdb
@@ -41,3 +42,12 @@ resources:
     parameters:
       service: hana
       service-plan: hdi-shared
+  - name: cpapp-auth
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: xsuaa
+      service-plan: application
+      path: ./xs-security.json
+      config:
+        xsappname: cpapp-${org}-${space}
+        tenant-mode: dedicated

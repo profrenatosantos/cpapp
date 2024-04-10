@@ -9,7 +9,8 @@
     "@sap/cds": "^7",
     "@sap/generator-fiori": "^1.13.1",
     "express": "^4",
-    "@sap/cds-hana": "^2"
+    "@sap/cds-hana": "^2",
+    "@sap/xssec": "^3"
   },
   "devDependencies": {
     "@cap-js/sqlite": "^1",
@@ -50,7 +51,8 @@
         }
       },
       "[prodution]": {
-        "db": "hana"
+        "db": "hana",
+        "auth": "xsuaa"
       }
     }
   }
